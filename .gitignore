@@ -1,3 +1,8 @@
+# dont include frames
+frames/*
+keyframes/*
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
