@@ -1,4 +1,5 @@
 import bpy
+from math import radians
 from bpy.types import Operator
 
 from bpy_extras.io_utils import (
@@ -45,20 +46,13 @@ class IMPORT_FACETRACKINGDATA(Operator, ImportHelper):
     background.image = image
     image.source = "SEQUENCE"
 
-    background.clip.frame_duration = len(framepaths)
-    background.frame_start = 1
-    background.frame_offset = int(os.path.splitext(framepaths[0])[0]) - 1
+    background.image_user.frame_duration = len(framepaths)
+    background.image_user.frame_start = 1
+    background.image_user.frame_offset = int(os.path.splitext(framepaths[0])[0]) - 1
 
-
-    # background.image.sequence.frame_duration = len(framepaths)
-    # background.image.sequence.frame_start = 1
-    # background.image.sequence.frame_offset = int(os.path.splitext(framepaths[0])[0]) - 1
-
-    # image = bpy.data.images.load(f"{directory}\\frames\\{frames[0]}")
-    # image.source = "SEQUENCE"
-    # camera.data.show_background_images = True
-    # background = camera.data.background_images.new()
-    # background.image = image
+    # Set camera position
+    camera.location = (0, -10, 0)
+    camera.rotation_euler = (radians(90), 0, 0)
 
     with open(self.filepath, "r") as file:
       data = json.loads(file.read())
